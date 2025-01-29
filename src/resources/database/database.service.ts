@@ -11,11 +11,11 @@ export class DatabaseService {
     private readonly referenceRepository: Repository<Reference>,
     @InjectRepository(Review)
     private readonly reviewRepository: Repository<Review>,
-  ) {}
+  ) { }
+  
+  
 
-  /**
-   * Save a reference (e.g., snippet and embedding) to the database.
-   */
+  //  Save a reference (e.g., snippet and embedding) to the database.
   async saveReference(
     content: string,
     embedding: number[],
@@ -29,9 +29,7 @@ export class DatabaseService {
     return await this.referenceRepository.save(reference);
   }
 
-  /**
-   * Save a review to the database.
-   */
+  // Save a review to the database.
   async saveReview(
     prompt: string,
     enrichedPrompt: string,
@@ -45,16 +43,12 @@ export class DatabaseService {
     return await this.reviewRepository.save(review);
   }
 
-  /**
-   * Fetch all references for debugging or audit purposes.
-   */
+  //  Fetch all references for debugging or audit purposes.
   async getAllReferences(): Promise<Reference[]> {
     return await this.referenceRepository.find();
   }
 
-  /**
-   * Fetch all reviews for debugging or audit purposes.
-   */
+  // Fetch all reviews for debugging or audit purposes.
   async getAllReviews(): Promise<Review[]> {
     return await this.reviewRepository.find();
   }

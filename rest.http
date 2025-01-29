@@ -1,2 +1,24 @@
 ###
+POST http://localhost:4000/review/submit-reference
+Content-Type: application/json
+{
+    "content" : "",
+    "metadata" : {
+        "id": "",
+        
+    }
+}
+
+###
+POST http://localhost:4000/review/generate-review
+Content-Type: application/json
+{
+    "prompt" : ""
+}
+
+
+###
 POST http://localhost:4000/review/test-pinecone-connection
+
+###
+POST http://localhost:4000/review/test-generate-Embedding

@@ -1,12 +1,14 @@
 import { Controller, Post, Body } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { VectorDbService } from '../vector-db/vector-db.service';
+import { EmbeddingService } from '../embedding/embedding.service';
 
 @Controller('review')
 export class ReviewController {
   constructor(
     private readonly reviewService: ReviewService,
     private readonly vectorbdService: VectorDbService,
+    private readonly embedService: EmbeddingService,
   ) {}
 
   @Post('submit-reference')
@@ -30,5 +32,10 @@ export class ReviewController {
   @Post('test-pinecone-connection')
   async testConnection() {
     return await this.vectorbdService.testPineconeConnection();
+  }
+
+  @Post('test-generate-Embedding')
+  async generateEmbedding() {
+    return await this.embedService.generateEmbedding('Hello, just checking');
   }
 }
