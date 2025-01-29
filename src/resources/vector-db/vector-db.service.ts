@@ -61,6 +61,7 @@ export class VectorDbService {
       topK,
       includeMetadata: true,
     });
+    console.log('upserting response: ', response);
 
     return response.matches.map((match) => ({
       id: match.id,

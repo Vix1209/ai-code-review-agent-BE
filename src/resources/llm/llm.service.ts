@@ -10,7 +10,7 @@ export class LlmService {
   private model: string;
 
   constructor() {
-    this.model = process.env.EMBEDDING_MODEL || 'gpt-4o-mini';
+    this.model = process.env.LLM_MODEL || 'gpt-4o-mini';
   }
 
   async generateFeedback(prompt: string): Promise<ChatCompletionMessage> {
@@ -21,6 +21,7 @@ export class LlmService {
           content: prompt,
         },
       ],
+      // max_tokens: 150,
       store: true,
       model: this.model,
     });
