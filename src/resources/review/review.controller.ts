@@ -1,9 +1,9 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { VectorDbService } from '../vector-db/vector-db.service';
 import { EmbeddingService } from '../embedding/embedding.service';
 
-@Controller('review')
+@Controller()
 export class ReviewController {
   constructor(
     private readonly reviewService: ReviewService,
@@ -37,5 +37,15 @@ export class ReviewController {
   @Post('test-generate-Embedding')
   async generateEmbedding() {
     return await this.embedService.generateEmbedding('Hello, just checking');
+  }
+
+  @Get('review')
+  async getReviews() {
+    return await this.reviewService.getReviews();
+  }
+
+  @Get('reference')
+  async getReference() {
+    return await this.reviewService.getReferences();
   }
 }

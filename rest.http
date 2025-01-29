@@ -1,5 +1,5 @@
 ### 
-POST http://localhost:4000/review/submit-reference
+POST http://localhost:4000/submit-reference
 Content-Type: application/json
 
 {
@@ -13,7 +13,7 @@ Content-Type: application/json
 }
 
 ### 
-POST http://localhost:4000/review/generate-review
+POST http://localhost:4000/generate-review
 Content-Type: application/json
 
 {
@@ -21,8 +21,14 @@ Content-Type: application/json
 }
 
 ### 
-POST http://localhost:4000/review/test-pinecone-connection
+POST http://localhost:4000/test-pinecone-connection
 
 
 ###
-POST http://localhost:4000/review/test-generate-Embedding
+POST http://localhost:4000/test-generate-Embedding
+
+###
+GET http://localhost:4000/review
+
+###
+GET http://localhost:4000/reference

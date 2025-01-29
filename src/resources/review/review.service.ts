@@ -91,4 +91,14 @@ export class ReviewService {
       return { feedback: 'No feedback available.' };
     }
   }
+
+  async getReviews() {
+    const reviews = await this.databaseService.getAllReviews();
+    return reviews;
+  }
+
+  async getReferences() {
+    const reference = await this.databaseService.getAllReferences();
+    return reference;
+  }
 }
