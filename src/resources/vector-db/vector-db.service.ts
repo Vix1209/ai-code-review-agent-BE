@@ -10,23 +10,12 @@ export class VectorDbService {
   private index: Index;
 
   constructor() {
-    this.index = this.pc.index('query-index');
+    this.index = this.pc.index(
+      process.env.INDEX_NAME || '',
+      process.env.INDEX_HOST || '',
+    );
     this.namespace = 'query-namespace';
   }
-
-  // async createIndex(indexName: string, dimension: number): Promise<void> {
-  //   await this.pc.createIndex({
-  //     name: indexName,
-  //     dimension: dimension || 1024,
-  //     metric: 'cosine',
-  //     spec: {
-  //       serverless: {
-  //         cloud: 'aws',
-  //         region: 'us-east-1',
-  //       },
-  //     },
-  //   });
-  // }
 
   async upsertEmbedding(vectors: {
     id: string;
@@ -35,24 +24,6 @@ export class VectorDbService {
   }): Promise<void> {
     await this.index.namespace(this.namespace).upsert([vectors]);
   }
-
-  // async query(
-  //   indexName: string,
-  //   vector: number[],
-  //   topK: number = 10,
-  //   filter?: Record<string, any>,
-  // ): Promise<any> {
-  //   const index = this.pc.index(indexName);
-
-  //   const queryRequest = {
-  //     vector,
-  //     topK,
-  //     includeMetadata: true,
-  //     includeValues: false,
-  //     ...(filter ? { filter } : {}),
-  //   };
-  //   return await index.query(queryRequest);
-  // }
 
   async searchEmbedding(queryEmbedding: number[], topK: number) {
     // Perform similarity search
@@ -67,5 +38,14 @@ export class VectorDbService {
       score: match.score,
       metadata: match.metadata,
     }));
+  }
+
+  async testPineconeConnection() {
+    try {
+      const stats = await this.pc.describeIndex(process.env.INDEX_NAME || '');
+      console.log('✅ Connected to Pinecone:', stats);
+    } catch (error) {
+      console.error('❌ Error connecting to Pinecone:', error);
+    }
   }
 }

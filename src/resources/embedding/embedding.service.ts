@@ -8,7 +8,7 @@ export class EmbeddingService {
 
   constructor() {
     this.openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY || '' });
-    this.model = process.env.EMBEDDING_MODEL || 'text-embedding-3-large';
+    this.model = process.env.EMBEDDING_MODEL || 'text-embedding-ada-002';
   }
 
   async generateEmbedding(content: string): Promise<number[]> {

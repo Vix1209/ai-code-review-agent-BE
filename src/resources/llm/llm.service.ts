@@ -21,6 +21,7 @@ export class LlmService {
           content: prompt,
         },
       ],
+      store: true,
       model: this.model,
     });
 
