@@ -92,13 +92,13 @@ export class ReviewService {
     }
   }
 
-  async getReviews() {
-    const reviews = await this.databaseService.getAllReviews();
-    return reviews;
-  }
+  // async getReviews() {
+  //   const reviews = await this.databaseService.getAllReviews();
+  //   return reviews;
+  // }
 
-  async getReferences() {
-    const reference = await this.databaseService.getAllReferences();
-    return reference;
-  }
+  // async getReferences() {
+  //   const reference = await this.databaseService.getAllReferences();
+  //   return reference;
+  // }
 }

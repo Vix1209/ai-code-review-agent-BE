@@ -13,7 +13,7 @@ export class ReviewController {
   ) {}
 
   @Post('submit-reference')
-  async submitReference(@Body()  data: SubmitReferenceDto) {
+  async submitReference(@Body() data: SubmitReferenceDto) {
     return await this.reviewService.processReference(
       data.content,
       data.metadata,
@@ -40,13 +40,13 @@ export class ReviewController {
     return await this.embedService.generateEmbedding('Hello, just checking');
   }
 
-  @Get('review')
-  async getReviews() {
-    return await this.reviewService.getReviews();
-  }
+  // @Get('review')
+  // async getReviews() {
+  //   return await this.reviewService.getReviews();
+  // }
 
-  @Get('reference')
-  async getReference() {
-    return await this.reviewService.getReferences();
-  }
+  // @Get('reference')
+  // async getReference() {
+  //   return await this.reviewService.getReferences();
+  // }
 }
