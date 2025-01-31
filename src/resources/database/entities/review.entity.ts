@@ -5,12 +5,12 @@ export class Review {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('text')
   prompt: string;
 
-  @Column()
+  @Column('text')
   enrichedPrompt: string;
 
-  @Column()
+  @Column('text')
   feedback: string; // Response from LLM
 }

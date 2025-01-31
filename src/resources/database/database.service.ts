@@ -11,9 +11,7 @@ export class DatabaseService {
     private readonly referenceRepository: Repository<Reference>,
     @InjectRepository(Review)
     private readonly reviewRepository: Repository<Review>,
-  ) { }
-  
-  
+  ) {}
 
   //  Save a reference (e.g., snippet and embedding) to the database.
   async saveReference(

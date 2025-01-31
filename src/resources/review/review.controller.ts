@@ -40,13 +40,13 @@ export class ReviewController {
     return await this.embedService.generateEmbedding('Hello, just checking');
   }
 
-  // @Get('review')
-  // async getReviews() {
-  //   return await this.reviewService.getReviews();
-  // }
+  @Get('review')
+  async getReviews() {
+    return await this.reviewService.getReviews();
+  }
 
-  // @Get('reference')
-  // async getReference() {
-  //   return await this.reviewService.getReferences();
-  // }
+  @Get('reference')
+  async getReference() {
+    return await this.reviewService.getReferences();
+  }
 }

@@ -27,13 +27,13 @@ export class ReviewService {
 
       // Store embedding in the vector database
       await this.vectorDbService.upsertEmbedding({
-        id: metadata.id || content.slice(0, 10), // Generate a unique ID if none is provided
+        id: metadata.id || content.slice(0, 10),
         values: embedding,
-        metadata,
+        metadata: { ...metadata, content }, // Ensure content is stored
       });
 
-      // // Save reference to the database
-      // await this.databaseService.saveReference(content, embedding, metadata);
+      // Save reference to the database
+      await this.databaseService.saveReference(content, embedding, metadata);
 
       return { success: true, message: 'Reference stored successfully.' };
     } catch (error) {
@@ -84,7 +84,7 @@ export class ReviewService {
       console.log('Feedback:', feedback);
 
       // Save review to the database
-      // await this.databaseService.saveReview(prompt, enrichedPrompt, feedback);
+      await this.databaseService.saveReview(prompt, enrichedPrompt, feedback);
 
       return { feedback };
     } else {
@@ -92,13 +92,13 @@ export class ReviewService {
     }
   }
 
-  // async getReviews() {
-  //   const reviews = await this.databaseService.getAllReviews();
-  //   return reviews;
-  // }
+  async getReviews() {
+    const reviews = await this.databaseService.getAllReviews();
+    return reviews;
+  }
 
-  // async getReferences() {
-  //   const reference = await this.databaseService.getAllReferences();
-  //   return reference;
-  // }
+  async getReferences() {
+    const reference = await this.databaseService.getAllReferences();
+    return reference;
+  }
 }

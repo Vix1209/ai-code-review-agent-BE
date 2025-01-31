@@ -24,7 +24,21 @@ export class VectorDbService {
     values: number[];
     metadata?: Record<string, any>;
   }): Promise<void> {
-    await this.index.namespace(this.namespace).upsert([vectors]);
+    const { metadata } = vectors;
+    console.log('Upserting Metadata:', { ...metadata });
+    await this.index.namespace(this.namespace).upsert([
+      {
+        id: vectors.id,
+        values: vectors.values,
+        metadata: {
+          id: metadata?.id,
+          author: metadata?.author,
+          category: metadata?.category,
+          timestamp: metadata?.timestamp,
+          content: metadata?.content,
+        },
+      },
+    ]);
   }
 
   async searchEmbedding(queryEmbedding: number[], topK: number) {

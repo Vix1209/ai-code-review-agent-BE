@@ -5,12 +5,12 @@ export class Reference {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column('text')
   content: string;
 
-  @Column()
+  @Column('text')
   embedding: string; // JSON string of the embedding
 
-  @Column()
+  @Column('text')
   metadata: string; // JSON string of additional metadata
 }
