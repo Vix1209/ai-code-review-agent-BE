@@ -3,8 +3,7 @@ import { EmbeddingModule } from './resources/embedding/embedding.module';
 import { VectorDbModule } from './resources/vector-db/vector-db.module';
 import { LlmModule } from './resources/llm/llm.module';
 import { ReviewModule } from './resources/review/review.module';
-// import { DatabaseModule } from './resources/database/database.module';
-import { ConfigModule } from '@nestjs/config';
+import { DatabaseModule } from './resources/database/database.module';
 
 @Module({
   imports: [
@@ -12,7 +11,7 @@ import { ConfigModule } from '@nestjs/config';
     VectorDbModule,
     LlmModule,
     ReviewModule,
-    // DatabaseModule,
+    DatabaseModule,
   ],
 })
 export class AppModule {}

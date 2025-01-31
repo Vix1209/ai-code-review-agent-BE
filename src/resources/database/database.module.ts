@@ -10,12 +10,17 @@ import { Review } from './entities/review.entity';
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT) || 5432,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_NAME,
+      // type: 'mysql',
+      // host: process.env.DB_HOST,
+      // port: Number(process.env.DB_PORT) || 5432,
+      // username: process.env.DB_USER,
+      // password: process.env.DB_PASSWORD,
+      // database: process.env.DB_NAME,
+      type: 'postgres',
+      url: process.env.DB_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
       entities: [Reference, Review],
       synchronize: true, // Turn off in production
     }),
