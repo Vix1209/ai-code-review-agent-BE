@@ -2,8 +2,9 @@ import { Controller, Post, Body, Get } from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { VectorDbService } from '../vector-db/vector-db.service';
 import { EmbeddingService } from '../embedding/embedding.service';
+import { GenerateReviewDto, SubmitReferenceDto } from './dto/resource.dto';
 
-@Controller()
+@Controller({ version: '1' })
 export class ReviewController {
   constructor(
     private readonly reviewService: ReviewService,
@@ -12,7 +13,7 @@ export class ReviewController {
   ) {}
 
   @Post('submit-reference')
-  async submitReference(@Body() data: { content: string; metadata: object }) {
+  async submitReference(@Body()  data: SubmitReferenceDto) {
     return await this.reviewService.processReference(
       data.content,
       data.metadata,
@@ -20,7 +21,7 @@ export class ReviewController {
   }
 
   @Post('generate-review')
-  async generateReview(@Body() data: { prompt: string }) {
+  async generateReview(@Body() data: GenerateReviewDto) {
     try {
       const query = await this.reviewService.generateReview(data.prompt);
       return { data: query, status: 'success' };

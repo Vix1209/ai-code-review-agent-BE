@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { Pinecone, Index } from '@pinecone-database/pinecone';
-import axios from 'axios';
 
 @Injectable()
 export class VectorDbService {
