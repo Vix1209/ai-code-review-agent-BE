@@ -14,7 +14,6 @@ export class ReviewController {
   ) {}
 
   @Post('submit-reference')
-  @ApiTags('Reference')
   async submitReference(@Body() data: SubmitReferenceDto) {
     return await this.reviewService.processReference(
       data.content,
@@ -23,7 +22,6 @@ export class ReviewController {
   }
 
   @Post('generate-review')
-  @ApiTags('Prompt')
   async generateReview(@Body() data: GenerateReviewDto) {
     try {
       const query = await this.reviewService.generateReview(data.prompt);
@@ -34,25 +32,21 @@ export class ReviewController {
   }
 
   @Post('test-pinecone-connection')
-  @ApiTags('Tests')
   async testConnection() {
     return await this.vectorbdService.testPineconeConnection();
   }
 
   @Post('test-generate-Embedding')
-  @ApiTags('Tests')
   async generateEmbedding() {
     return await this.embedService.generateEmbedding('Hello, just checking');
   }
 
   @Get('get-review')
-  @ApiTags('Prompt')
   async getReviews() {
     return await this.reviewService.getReviews();
   }
 
   @Get('get-reference')
-  @ApiTags('Reference')
   async getReference() {
     return await this.reviewService.getReferences();
   }

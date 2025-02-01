@@ -23,7 +23,6 @@ export class ReviewService {
     // Generate embedding for the content
     try {
       const embedding = await this.embeddingService.generateEmbedding(content);
-      console.log('Embedding: ', embedding);
 
       // Store embedding in the vector database
       await this.vectorDbService.upsertEmbedding({
@@ -54,15 +53,12 @@ export class ReviewService {
     const queryEmbedding =
       await this.embeddingService.generateEmbedding(prompt);
 
-    console.log('queryEmbedding: ', queryEmbedding);
-
     // Search for relevant embeddings in the vector database
     const searchResults = await this.vectorDbService.searchEmbedding(
       queryEmbedding,
       Number(process.env.TOP_K_VALUE) || 3,
     ); // Top matches to return
 
-    console.log('searchResults, ', searchResults);
     // Combine context from search results
     const context = searchResults
       .map((result) => result.metadata?.content || '')
@@ -70,8 +66,6 @@ export class ReviewService {
 
     // Enrich the prompt with retrieved context
     const enrichedPrompt = `${prompt}\n\nContext:\n${context}`;
-
-    console.log('Context: ', context);
 
     // Use the LLM to generate feedback
     const feedbackResponse =
@@ -81,7 +75,6 @@ export class ReviewService {
       const feedback = feedbackResponse.content || ''; // Ensure feedback is always a string
 
       // Log the feedback for debugging
-      console.log('Feedback:', feedback);
 
       // Save review to the database
       await this.databaseService.saveReview(prompt, enrichedPrompt, feedback);

@@ -25,7 +25,6 @@ export class VectorDbService {
     metadata?: Record<string, any>;
   }): Promise<void> {
     const { metadata } = vectors;
-    console.log('Upserting Metadata:', { ...metadata });
     await this.index.namespace(this.namespace).upsert([
       {
         id: vectors.id,
@@ -48,7 +47,6 @@ export class VectorDbService {
       topK,
       includeMetadata: true,
     });
-    console.log('upserting response: ', response);
 
     return response.matches.map((match) => ({
       id: match.id,
