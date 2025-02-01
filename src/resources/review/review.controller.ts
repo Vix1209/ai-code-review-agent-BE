@@ -31,15 +31,15 @@ export class ReviewController {
     }
   }
 
-  @Post('test-pinecone-connection')
-  async testConnection() {
-    return await this.vectorbdService.testPineconeConnection();
-  }
+  // @Post('test-pinecone-connection')
+  // async testConnection() {
+  //   return await this.vectorbdService.testPineconeConnection();
+  // }
 
-  @Post('test-generate-Embedding')
-  async generateEmbedding() {
-    return await this.embedService.generateEmbedding('Hello, just checking');
-  }
+  // @Post('test-generate-Embedding')
+  // async generateEmbedding() {
+  //   return await this.embedService.generateEmbedding('Hello, just checking');
+  // }
 
   @Get('get-review')
   async getReviews() {
