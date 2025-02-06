@@ -21,7 +21,7 @@ import { Review } from './entities/review.entity';
       ssl: {
         rejectUnauthorized: false,
       },
-      entities: [Reference, Review],
+      autoLoadEntities: true,
       synchronize: true, // Turn off in production
     }),
     TypeOrmModule.forFeature([Reference, Review]),

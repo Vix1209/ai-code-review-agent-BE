@@ -19,13 +19,14 @@ export class AccountService {
 
   async findAll() {
     const users = await this.accountRepository.find();
-    return users;
+    return {
+      data: users,
+    };
   }
 
   async findOneById(id: string): Promise<Account> {
     const user = await this.accountRepository.findOne({
       where: { id },
-      relations: ['role'],
     });
 
     if (!user) {

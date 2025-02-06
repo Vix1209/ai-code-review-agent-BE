@@ -29,6 +29,8 @@ export class AuthService {
       return 'Email is required';
     }
 
+    await this.validateUser(accountDto);
+
     // Check if email is already in use
     const existingAccount = await this.accountRepository.findOne({
       where: { email: accountDto.email },
@@ -48,7 +50,15 @@ export class AuthService {
           expiresIn: '1h',
           secret: process.env.jwtSecretKey,
         });
-        return { account: existingAccount, access_token };
+        // return { account: { ...existingAccount, access_token } };
+        return {
+          account: {
+            id: existingAccount.id,
+            email: existingAccount.email,
+            status: existingAccount.status,
+          },
+          access_token,
+        };
       }
     } else {
       // Hash password
