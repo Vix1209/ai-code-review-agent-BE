@@ -29,8 +29,6 @@ export class AuthService {
       return 'Email is required';
     }
 
-    await this.validateUser(accountDto);
-
     // Check if email is already in use
     const existingAccount = await this.accountRepository.findOne({
       where: { email: accountDto.email },
@@ -42,25 +40,32 @@ export class AuthService {
           `Email ${accountDto.email} belonged to a deleted account`,
         );
       } else {
+        // Log in User;
+
+        const account = await this.validateUser(accountDto);
+
         const payload = {
-          email: existingAccount.email,
-          sub: existingAccount.id,
+          email: account.email,
+          sub: account.id,
         };
+
         const access_token = await this.jwtService.signAsync(payload, {
           expiresIn: '1h',
           secret: process.env.jwtSecretKey,
         });
-        // return { account: { ...existingAccount, access_token } };
+
         return {
-          account: {
-            id: existingAccount.id,
-            email: existingAccount.email,
-            status: existingAccount.status,
+          data: {
+            id: account.id,
+            email: account.email,
+            status: account.status,
           },
           access_token,
         };
       }
     } else {
+      //Sign up user
+
       // Hash password
       accountDto.password = await hash(accountDto.password, 10);
 
@@ -72,20 +77,21 @@ export class AuthService {
         email: account.email,
         sub: account.id,
       };
+
       const access_token = await this.jwtService.signAsync(payload, {
         expiresIn: '1h',
         secret: process.env.jwtSecretKey,
       });
-      return { account: account, access_token };
-    }
-  }
 
-  async generateJwtToken(user: Account) {
-    const payload = { email: user.email, sub: user.id };
-    return this.jwtService.signAsync(payload, {
-      expiresIn: '1h',
-      secret: process.env.jwtSecretKey,
-    });
+      return {
+        data: {
+          id: account.id,
+          email: account.email,
+          status: account.status,
+        },
+        access_token,
+      };
+    }
   }
 
   async findUserWithEmail(email: string): Promise<Account> {
@@ -103,10 +109,6 @@ export class AuthService {
 
   async validateUser(dto: AccountDto) {
     const account = await this.findUserWithEmail(dto.email);
-
-    if (!account) {
-      throw new ConflictException(`Account does not exist`);
-    }
 
     // Check if the user's account is active
     if (account.status !== 'active') {
