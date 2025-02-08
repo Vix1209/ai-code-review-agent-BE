@@ -15,8 +15,8 @@ export class ReviewController {
   ) {}
 
   @Post('submit-reference')
-  @UseGuards(JwtGuard)
-  @ApiBearerAuth('JWT')
+  // @UseGuards(JwtGuard)
+  // @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Generate references' })
   async submitReference(@Body() data: SubmitReferenceDto) {
     return await this.reviewService.processReference(
@@ -26,8 +26,8 @@ export class ReviewController {
   }
 
   @Post('generate-review')
-  @UseGuards(JwtGuard)
-  @ApiBearerAuth('JWT')
+  // @UseGuards(JwtGuard)
+  // @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Generate reviews' })
   async generateReview(@Body() data: GenerateReviewDto) {
     try {
