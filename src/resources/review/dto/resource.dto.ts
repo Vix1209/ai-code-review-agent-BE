@@ -1,4 +1,10 @@
-import { IsString, IsObject, IsNotEmpty, IsOptional } from 'class-validator';
+import {
+  IsString,
+  IsObject,
+  IsNotEmpty,
+  IsOptional,
+  IsNumber,
+} from 'class-validator';
 import { GlobalApiResponse } from 'utils';
 
 export class SubmitReferenceDto {
@@ -17,7 +23,7 @@ export class SubmitReferenceDto {
   metadata: { id?: string; metadata: Record<string, any> };
   // metadata: { id?: string; [key: string]: any };
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
   @GlobalApiResponse('The User')
   userId?: number;
@@ -29,7 +35,7 @@ export class GenerateReviewDto {
   @GlobalApiResponse('The Actual Prompt to be sent to the LLM')
   prompt: string;
 
-  @IsString()
+  @IsNumber()
   @IsOptional()
   @GlobalApiResponse('The User ')
   userId?: number;
