@@ -67,8 +67,11 @@ export class DatabaseService {
   }
 
   //  Fetch all references for debugging or audit purposes.
-  async getAllReferences(): Promise<Reference[]> {
+  async getAllReferences(userId: number): Promise<Reference[]> {
     return await this.referenceRepository.find({
+      where: {
+        accountId: { id: userId },
+      },
       relations: {
         accountId: true,
       },
@@ -76,10 +79,10 @@ export class DatabaseService {
   }
 
   //  Fetch all references for debugging or audit purposes.
-  async getSingleReference(id: string): Promise<Reference> {
+  async getSingleReference(id: number): Promise<Reference> {
     const reference = await this.referenceRepository.findOne({
       where: {
-        id: Number(id),
+        id,
       },
     });
     if (!reference) {
@@ -89,18 +92,21 @@ export class DatabaseService {
   }
 
   // Fetch all reviews for debugging or audit purposes.
-  async getAllReviews(): Promise<Review[]> {
+  async getAllReviews(userId: number): Promise<Review[]> {
     return await this.reviewRepository.find({
+      where: {
+        accountId: { id: userId },
+      },
       relations: {
         accountId: true,
       },
     });
   }
 
-  async getSingleReview(id: string): Promise<Review> {
+  async getSingleReview(id: number): Promise<Review> {
     const review = await this.reviewRepository.findOne({
       where: {
-        id: Number(id),
+        id,
       },
     });
     if (!review) {
