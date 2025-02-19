@@ -21,7 +21,7 @@ export class DatabaseService {
     content: string,
     embedding: number[],
     metadata: object,
-    userId: string,
+    userId: number,
   ): Promise<Reference> {
     const reference = this.referenceRepository.create({
       content,
@@ -46,7 +46,7 @@ export class DatabaseService {
     prompt: string,
     enrichedPrompt: string,
     feedback: string,
-    userId: string,
+    userId: number,
   ): Promise<Review> {
     const review = this.reviewRepository.create({
       prompt,

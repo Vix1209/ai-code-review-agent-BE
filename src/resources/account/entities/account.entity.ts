@@ -13,7 +13,7 @@ import {
 @Entity({ name: 'accounts' })
 export class Account {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({ unique: true })
   email: string;

@@ -20,7 +20,7 @@ export class SubmitReferenceDto {
   @IsString()
   @IsOptional()
   @GlobalApiResponse('The User')
-  userId?: string;
+  userId?: number;
 }
 
 export class GenerateReviewDto {
@@ -32,5 +32,5 @@ export class GenerateReviewDto {
   @IsString()
   @IsOptional()
   @GlobalApiResponse('The User ')
-  userId?: string;
+  userId?: number;
 }
