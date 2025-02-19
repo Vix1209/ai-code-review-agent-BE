@@ -24,7 +24,7 @@ export class AccountService {
     };
   }
 
-  async findOneById(id: number): Promise<Account> {
+  async findOneById(id: string): Promise<Account> {
     const user = await this.accountRepository.findOne({
       where: { id },
     });
@@ -73,7 +73,7 @@ export class AccountService {
     return { message: 'Password updated successfully' };
   }
 
-  async toggleAccountStatus(id: number) {
+  async toggleAccountStatus(id: string) {
     const user = await this.accountRepository.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('User not found');
@@ -92,7 +92,7 @@ export class AccountService {
     };
   }
 
-  async deleteAccount(id: number) {
+  async deleteAccount(id: string) {
     const user = await this.accountRepository.findOne({ where: { id } });
     if (!user) {
       throw new ConflictException(`User with id ${id} does not exist`);
@@ -102,7 +102,7 @@ export class AccountService {
     return { message: `Account deleted successfully` };
   }
 
-  async restoreAccount(id: number) {
+  async restoreAccount(id: string) {
     const user = await this.accountRepository.findOne({
       where: { id },
       withDeleted: true,

@@ -62,7 +62,7 @@ export class AccountController {
   @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Deactivate or activate an account' })
-  async toggelStatus(@Param('id') id: number) {
+  async toggelStatus(@Param('id') id: string) {
     const data = await this.accountService.toggleAccountStatus(id);
     return {
       data,
@@ -74,7 +74,7 @@ export class AccountController {
   @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Delete an account' })
-  async remove(@Param('id') id: number) {
+  async remove(@Param('id') id: string) {
     const data = await this.accountService.deleteAccount(id);
     return {
       data,
@@ -86,7 +86,7 @@ export class AccountController {
   @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Restore an account' })
-  async restore(@Param('id') id: number) {
+  async restore(@Param('id') id: string) {
     const data = await this.accountService.restoreAccount(id);
     return {
       data,

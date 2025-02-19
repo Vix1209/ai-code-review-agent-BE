@@ -21,7 +21,7 @@ export class DatabaseService {
     content: string,
     embedding: number[],
     metadata: object,
-    userId: number,
+    userId: string,
   ): Promise<Reference> {
     const reference = this.referenceRepository.create({
       content,
@@ -46,7 +46,7 @@ export class DatabaseService {
     prompt: string,
     enrichedPrompt: string,
     feedback: string,
-    userId: number,
+    userId: string,
   ): Promise<Review> {
     const review = this.reviewRepository.create({
       prompt,
@@ -67,7 +67,7 @@ export class DatabaseService {
   }
 
   //  Fetch all references for debugging or audit purposes.
-  async getAllReferences(userId: number): Promise<Reference[]> {
+  async getAllReferences(userId: string): Promise<Reference[]> {
     return await this.referenceRepository.find({
       where: {
         accountId: { id: userId },
@@ -79,7 +79,7 @@ export class DatabaseService {
   }
 
   //  Fetch all references for debugging or audit purposes.
-  async getSingleReference(id: number): Promise<Reference> {
+  async getSingleReference(id: string): Promise<Reference> {
     const reference = await this.referenceRepository.findOne({
       where: {
         id,
@@ -92,7 +92,7 @@ export class DatabaseService {
   }
 
   // Fetch all reviews for debugging or audit purposes.
-  async getAllReviews(userId: number): Promise<Review[]> {
+  async getAllReviews(userId: string): Promise<Review[]> {
     return await this.reviewRepository.find({
       where: {
         accountId: { id: userId },
@@ -103,7 +103,7 @@ export class DatabaseService {
     });
   }
 
-  async getSingleReview(id: number): Promise<Review> {
+  async getSingleReview(id: string): Promise<Review> {
     const review = await this.reviewRepository.findOne({
       where: {
         id,

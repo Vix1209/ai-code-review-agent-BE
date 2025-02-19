@@ -104,22 +104,22 @@ export class ReviewService {
     }
   }
 
-  async getReviews(userId: number) {
+  async getReviews(userId: string) {
     const reviews = await this.databaseService.getAllReviews(userId);
     return reviews;
   }
 
-  async getSingleReview(id: number) {
+  async getSingleReview(id: string) {
     const reviews = await this.databaseService.getSingleReview(id);
     return reviews;
   }
 
-  async getReferences(userId: number) {
+  async getReferences(userId: string) {
     const reference = await this.databaseService.getAllReferences(userId);
     return reference;
   }
 
-  async getSingleReference(id: number) {
+  async getSingleReference(id: string) {
     const reference = await this.databaseService.getSingleReference(id);
     return reference;
   }
