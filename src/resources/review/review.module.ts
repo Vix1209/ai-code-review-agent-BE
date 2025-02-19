@@ -9,9 +9,17 @@ import { DatabaseModule } from '../database/database.module';
 import { LlmModule } from '../llm/llm.module';
 import { VectorDbModule } from '../vector-db/vector-db.module';
 import { VectorDbService } from '../vector-db/vector-db.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Account } from '../account/entities/account.entity';
 
 @Module({
-  imports: [EmbeddingModule, DatabaseModule, LlmModule, VectorDbModule],
+  imports: [
+    TypeOrmModule.forFeature([Account]),
+    EmbeddingModule,
+    DatabaseModule,
+    LlmModule,
+    VectorDbModule,
+  ],
   controllers: [ReviewController],
   providers: [
     ReviewService,

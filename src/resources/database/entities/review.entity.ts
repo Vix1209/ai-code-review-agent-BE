@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Account } from 'src/resources/account/entities/account.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Review {
@@ -13,4 +14,7 @@ export class Review {
 
   @Column('text')
   feedback: string; // Response from LLM
+
+  @ManyToOne(() => Account, (account) => account.reviews, { nullable: true })
+  accountId: Account;
 }

@@ -1,3 +1,5 @@
+import { Reference } from 'src/resources/database/entities/reference.entity';
+import { Review } from 'src/resources/database/entities/review.entity';
 import {
   Entity,
   Column,
@@ -5,6 +7,7 @@ import {
   DeleteDateColumn,
   UpdateDateColumn,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity({ name: 'accounts' })
@@ -42,4 +45,10 @@ export class Account {
     nullable: true,
   })
   deletedAt: Date;
+
+  @OneToMany(() => Reference, (reference) => reference.accountId)
+  references: Reference[];
+
+  @OneToMany(() => Review, (review) => review.accountId)
+  reviews: Review[];
 }

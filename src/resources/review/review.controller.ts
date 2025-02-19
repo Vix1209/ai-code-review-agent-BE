@@ -1,4 +1,12 @@
-import { Controller, Post, Body, Get, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Body,
+  Get,
+  UseGuards,
+  Req,
+  Param,
+} from '@nestjs/common';
 import { ReviewService } from './review.service';
 import { VectorDbService } from '../vector-db/vector-db.service';
 import { EmbeddingService } from '../embedding/embedding.service';
@@ -19,10 +27,7 @@ export class ReviewController {
   // @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Generate references' })
   async submitReference(@Body() data: SubmitReferenceDto) {
-    return await this.reviewService.processReference(
-      data.content,
-      data.metadata,
-    );
+    return await this.reviewService.processReference(data);
   }
 
   @Post('generate-review')
@@ -31,7 +36,7 @@ export class ReviewController {
   @ApiOperation({ summary: 'Generate reviews' })
   async generateReview(@Body() data: GenerateReviewDto) {
     try {
-      const query = await this.reviewService.generateReview(data.prompt);
+      const query = await this.reviewService.generateReview(data);
       return { data: query, status: 'success' };
     } catch (error) {
       return { data: error.message, status: 'failed' };
@@ -62,5 +67,21 @@ export class ReviewController {
   @ApiOperation({ summary: 'Get References' })
   async getReference() {
     return await this.reviewService.getReferences();
+  }
+
+  @Get('get-reference/:referenceId')
+  @UseGuards(JwtGuard)
+  @ApiBearerAuth('JWT')
+  @ApiOperation({ summary: 'Get References' })
+  async getSingleReference(@Param() referenceId: string) {
+    return await this.reviewService.getSingleReference(referenceId);
+  }
+
+  @Get('get-review/:reviewId')
+  @UseGuards(JwtGuard)
+  @ApiBearerAuth('JWT')
+  @ApiOperation({ summary: 'Get References' })
+  async getSingleReview(@Param() reviewId: string) {
+    return await this.reviewService.getSingleReview(reviewId);
   }
 }

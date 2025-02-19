@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Account } from 'src/resources/account/entities/account.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity()
 export class Reference {
@@ -13,4 +14,7 @@ export class Reference {
 
   @Column('text')
   metadata: string; // JSON string of additional metadata
+
+  @ManyToOne(() => Account, (account) => account.references, { nullable: true })
+  accountId: Account;
 }
