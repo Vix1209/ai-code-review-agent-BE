@@ -72,7 +72,7 @@ export class ReviewController {
   @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Get References' })
-  async getSingleReference(@Param() referenceId: string) {
+  async getSingleReference(@Param('referenceId') referenceId: string) {
     return await this.reviewService.getSingleReference(referenceId);
   }
 
@@ -80,7 +80,7 @@ export class ReviewController {
   @UseGuards(JwtGuard)
   @ApiBearerAuth('JWT')
   @ApiOperation({ summary: 'Get References' })
-  async getSingleReview(@Param() reviewId: string) {
+  async getSingleReview(@Param('reviewId') reviewId: string) {
     return await this.reviewService.getSingleReview(reviewId);
   }
 }
