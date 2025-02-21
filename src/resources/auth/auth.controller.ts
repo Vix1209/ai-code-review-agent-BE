@@ -8,8 +8,8 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { JwtGuard } from './guard/jwt.guard';
-import { GetUser } from './customDecorators/getUser';
+import { JwtGuard } from '../../../utils/guard/jwt.guard';
+import { GetUser } from '../../../utils/customDecorators/getUser';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { GlobalApiResponse } from 'utils';
 import { AccountDto } from './dto/account.dto';

@@ -12,7 +12,8 @@ import { VectorDbService } from '../vector-db/vector-db.service';
 import { EmbeddingService } from '../embedding/embedding.service';
 import { GenerateReviewDto, SubmitReferenceDto } from './dto/resource.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { JwtGuard } from '../auth/guard/jwt.guard';
+import { JwtGuard } from '../../../utils/guard/jwt.guard';
+import { BlockRequests } from 'utils/customDecorators/blockRequests';
 
 @Controller({ version: '1' })
 export class ReviewController {
@@ -23,12 +24,14 @@ export class ReviewController {
   ) {}
 
   @Post('submit-reference')
+  @BlockRequests()
   @ApiOperation({ summary: 'Generate references' })
   async submitReference(@Body() data: SubmitReferenceDto) {
     return await this.reviewService.processReference(data);
   }
 
   @Post('generate-review')
+  @BlockRequests()
   @ApiOperation({ summary: 'Generate reviews' })
   async generateReview(@Body() data: GenerateReviewDto) {
     try {

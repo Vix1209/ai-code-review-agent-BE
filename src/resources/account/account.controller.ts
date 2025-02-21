@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { ApiBearerAuth, ApiOperation, ApiQuery } from '@nestjs/swagger';
-import { JwtGuard } from '../auth/guard/jwt.guard';
+import { JwtGuard } from '../../../utils/guard/jwt.guard';
 import { UpdatePasswordDto } from '../auth/dto/update-password.dto';
 import { GlobalApiResponse } from 'utils';
 
