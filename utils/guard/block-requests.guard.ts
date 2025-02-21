@@ -18,10 +18,7 @@ export class BlockRequestsGuard implements CanActivate {
     const isBlocked = process.env.BLOCK_REQUESTS === 'true';
 
     if (isBlocked) {
-      throw new HttpException(
-        'Action disabled!. Cannot process request',
-        HttpStatus.FORBIDDEN,
-      );
+      throw new HttpException('Action disabled by Admin', HttpStatus.FORBIDDEN);
     }
 
     return true;
