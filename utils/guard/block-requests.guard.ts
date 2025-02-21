@@ -19,7 +19,7 @@ export class BlockRequestsGuard implements CanActivate {
 
     if (isBlocked) {
       throw new HttpException(
-        'Requests are currently blocked by the administrator.',
+        'Action disabled!. Cannot process request',
         HttpStatus.FORBIDDEN,
       );
     }
