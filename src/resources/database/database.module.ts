@@ -9,33 +9,37 @@ import { Review } from './entities/review.entity';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    TypeOrmModule.forRoot(
-      process.env.NODE_ENV === 'development'
-        ? {
-            type: 'mysql',
-            host: process.env.DB_HOST,
-            port: Number(process.env.DB_PORT) || 5432,
-            username: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: process.env.DB_NAME,
-            ssl: {
-              rejectUnauthorized: false,
-            },
-            autoLoadEntities: true,
-            synchronize: true, // Turn off in production
-          }
-        : {
-            type: 'postgres',
-            url: process.env.DB_URL,
-            ssl: {
-              rejectUnauthorized: false,
-            },
-            autoLoadEntities: true,
-            synchronize: true, // Turn off in production
-          },
-    ),
+    TypeOrmModule.forRootAsync({ useFactory: createTypeOrmConfig }),
     TypeOrmModule.forFeature([Reference, Review]),
   ],
   exports: [TypeOrmModule],
 })
 export class DatabaseModule {}
+
+export function createTypeOrmConfig(): any {
+  if (process.env.NODE_ENV === 'development') {
+    return {
+      type: 'mysql',
+      host: process.env.DB_HOST,
+      port: Number(process.env.DB_PORT) || 5432,
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+      autoLoadEntities: true,
+      synchronize: false,
+    };
+  } else {
+    return {
+      type: 'postgres',
+      url: process.env.DB_URL,
+      ssl: {
+        rejectUnauthorized: false,
+      },
+      autoLoadEntities: true,
+      synchronize: false, 
+    };
+  }
+}

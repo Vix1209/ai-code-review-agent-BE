@@ -34,3 +34,20 @@ export class GenerateReviewDto {
   @GlobalApiResponse('The User ')
   userId?: string;
 }
+
+export class SubmitFeedbackDto {
+  @IsString()
+  @IsNotEmpty()
+  @GlobalApiResponse('The Review Id to be sent a feedback')
+  reviewId: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @GlobalApiResponse('The Actual feedback to be sent for a review')
+  feedback: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @GlobalApiResponse('The User sending the feedback')
+  userId: string;
+}
