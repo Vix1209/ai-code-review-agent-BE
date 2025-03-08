@@ -84,4 +84,4 @@ The application will be available at http://localhost:4000.
 
 ## License
 
-<p>This project is licensed under the MIT License.</p>This README.md file now uses HTML syntax for the sections from "Endpoints" downwards, providing a more structured and collapsible format. Adjust the content as needed to fit your specific project details. This README.md file now uses HTML syntax for the sections from "Endpoints" downwards, providing a more structured and collapsible format. Adjust the content as needed to fit your specific project details.
+<p>This project is licensed under the MIT License.</p> ```
