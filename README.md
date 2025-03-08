@@ -33,6 +33,11 @@ npm install
 Create a `.env` file in the root directory and add the following configurations:
 
 ```env
+
+# Environment Setup
+NODE_ENV=development
+PORT=4000
+
 # Database configuration
 DB_HOST=localhost
 DB_PORT=5432
@@ -49,10 +54,15 @@ LLM_MODEL=gpt-4o-mini
 PINECONE_API_KEY=your_pinecone_api_key
 INDEX_NAME=your_index_name
 INDEX_HOST=your_index_host
+TOP_K_VALUE=3
 EMBEDDING_MODEL=text-embedding-ada-002
 
 # JWT configuration
 JWT_SECRET_KEY=your_jwt_secret_key
+
+# Swagger Docs Setup
+API_VERSION='1'
+APP_NAME='Ai-Agent'
 
 ```
 
