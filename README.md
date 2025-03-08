@@ -84,4 +84,4 @@ The application will be available at http://localhost:4000.
 
 ## License
 
-<p>This project is licensed under the MIT License.</p> ```
+<p>This project is licensed under the MIT License.</p>
