@@ -18,6 +18,7 @@ export class DatabaseModule {}
 
 export function createTypeOrmConfig(): any {
   if (process.env.NODE_ENV === 'development') {
+    console.log('Connecting to local MySQL database on MySQL Workbench');
     return {
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -32,14 +33,21 @@ export function createTypeOrmConfig(): any {
       synchronize: false,
     };
   } else {
+    const dbUrl = process.env.DB_URL;
+
+    if (!dbUrl) {
+      throw new Error('Database URL is not defined in environment variables');
+    }
+
+    console.log(`Connecting to Cloud database`);
     return {
-      type: 'postgres',
-      url: process.env.DB_URL,
+      type: 'mysql',
+      url: dbUrl,
       ssl: {
         rejectUnauthorized: false,
       },
       autoLoadEntities: true,
-      synchronize: false, 
+      synchronize: false,
     };
   }
 }
