@@ -64,47 +64,27 @@ npm run start
 
 ```
 
-The application will be available at http://localhost:3000.
+The application will be available at http://localhost:4000.
 
-Endpoints
-Authentication
-POST /auth/login-or-signup: Login or signup a user.
-Review
-POST /review/submit-reference: Submit a reference document.
-POST /review/generate-review: Generate a personalized review.
-POST /review/test-pinecone-connection: Test the connection to Pinecone.
-POST /review/test-generate-embedding: Test the embedding generation.
-Reference
-GET /reference/get-reference: Get all references.
-GET /reference/get-reference/:referenceId: Get a single reference by ID.
-Review
-GET /review/get-review: Get all reviews.
-GET /review/get-review/:reviewId: Get a single review by ID.
-Services
-LlmService
-This service integrates with OpenAI to generate feedback based on a given prompt.
+## Endpoints
 
-VectorDbService
-This service integrates with Pinecone to upsert and search embeddings.
+<details> <summary>Authentication</summary> <ul> <li><code>POST /auth/login-or-signup</code>: Login or signup a user.</li> </ul> </details> <details> <summary>Review</summary> <ul> <li><code>POST /review/submit-reference</code>: Submit a reference document.</li> <li><code>POST /review/generate-review</code>: Generate a personalized review.</li> <li><code>POST /review/test-pinecone-connection</code>: Test the connection to Pinecone.</li> <li><code>POST /review/test-generate-embedding</code>: Test the embedding generation.</li> </ul> </details> <details> <summary>Reference</summary> <ul> <li><code>GET /reference/get-reference</code>: Get all references.</li> <li><code>GET /reference/get-reference/:referenceId</code>: Get a single reference by ID.</li> </ul> </details> <details> <summary>Review</summary> <ul> <li><code>GET /review/get-review</code>: Get all reviews.</li> <li><code>GET /review/get-review/:reviewId</code>: Get a single review by ID.</li> </ul> </details>
 
-ReviewService
-This service handles the logic for generating reviews and processing references.
+## Services
 
-AuthService
-This service handles the authentication logic, including login and signup.
-
+<details> <summary>LlmService</summary> <p>This service integrates with OpenAI to generate feedback based on a given prompt.</p> </details> <details> <summary>VectorDbService</summary> <p>This service integrates with Pinecone to upsert and search embeddings.</p> </details> <details> <summary>ReviewService</summary> <p>This service handles the logic for generating reviews and processing references.</p> </details> <details> <summary>AuthService</summary> <p>This service handles the authentication logic, including login and signup.</p> </details>
 Entities
-User
-Represents a user in the system.
+<details> <summary>User</summary> <p>Represents a user in the system.</p> </details> <details> <summary>Reference</summary> <p>Represents a reference document in the system.</p> </details> <details> <summary>Review</summary> <p>Represents a review in the system.</p> </details>
 
-Reference
-Represents a reference document in the system.
+## Entities
 
-Review
-Represents a review in the system.
+<details> <summary>User</summary> <p>Represents a user in the system.</p> </details> <details> <summary>Reference</summary> <p>Represents a reference document in the system.</p> </details> <details> <summary>Review</summary> <p>Represents a review in the system.</p> </details>
 
-Rate Limiting
-The application uses nestjs-rate-limiter to limit the number of requests to the LLM model and Pinecone DB. The rate limiting configuration is set using environment variables.
+<!-- ## Rate Limiting
 
-License
-This project is licensed under the MIT License.
+<p>The application uses <code>nestjs-rate-limiter</code> to limit the number of requests to the LLM model and Pinecone DB. The rate limiting configuration is set using environment variables.</p> -->
+
+## License
+
+<p>This project is licensed under the MIT License.</p> ```
+This README.md file now uses HTML syntax for the sections from "Endpoints" downwards, providing a more structured and collapsible format. Adjust the content as needed to fit your specific project details. This README.md file now uses HTML syntax for the sections from "Endpoints" downwards, providing a more structured and collapsible format. Adjust the content as needed to fit your specific project details.
