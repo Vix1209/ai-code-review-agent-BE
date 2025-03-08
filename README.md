@@ -10,7 +10,6 @@ This is the backend for the AI-Agent project. It is built using NestJS and TypeO
 - [Endpoints](#endpoints)
 - [Services](#services)
 - [Entities](#entities)
-- [Rate Limiting](#rate-limiting)
 
 ## Installation
 
