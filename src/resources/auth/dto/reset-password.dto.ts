@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 // src/user/dto/reset-password.dto.ts
 export class ResetPasswordDto {
@@ -18,4 +18,12 @@ export class ResetPasswordDto {
   @IsString()
   @IsNotEmpty()
   newPassword: string;
+
+  @ApiProperty({
+    description: 'The user new password',
+    example: '',
+  })
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
 }

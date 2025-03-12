@@ -153,9 +153,13 @@ export class AuthService {
   }
 
   async resetPassword(resetPasswordDto: ResetPasswordDto) {
-    const { token, newPassword } = resetPasswordDto;
+    const { token, newPassword, email } = resetPasswordDto;
     const user = await this.accountRepository.findOne({
-      where: { resetToken: token, resetTokenExpiry: MoreThan(new Date()) },
+      where: {
+        resetToken: token,
+        resetTokenExpiry: MoreThan(new Date()),
+        email: email,
+      },
     });
     if (!user) {
       throw new ConflictException('Invalid or expired token');
