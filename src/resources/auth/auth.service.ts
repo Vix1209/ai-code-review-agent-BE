@@ -170,6 +170,7 @@ export class AuthService {
     user.resetTokenExpiry = null;
     const saved = await this.accountRepository.save(user);
     if (saved) {
+      console.log('Password reset successful');
       await this.mailService.sendResetTokenConfirmation(user.email, user, true);
     }
     return;
