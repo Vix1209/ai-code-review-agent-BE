@@ -43,7 +43,7 @@ export class AuthController {
     return { data: userWithoutDeletedAt, status: 'success' };
   }
 
-  @Patch('forgot-password')
+  @Post('forgot-password')
   @ApiOperation({ summary: 'Forgot Password' })
   async forgotPassword(@Body() dto: ForgotPasswordDto) {
     await this.authService.forgotPassword(dto);
@@ -52,9 +52,7 @@ export class AuthController {
 
   @Patch('reset-password')
   @ApiOperation({ summary: 'Reset Password' })
-  async resetPassword(
-    @Body() dto: ResetPasswordDto,
-  ) {
+  async resetPassword(@Body() dto: ResetPasswordDto) {
     await this.authService.resetPassword(dto);
     return { status: 'success' };
   }
