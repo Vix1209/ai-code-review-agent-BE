@@ -3,7 +3,7 @@ import { EmbeddingModule } from './resources/embedding/embedding.module';
 import { VectorDbModule } from './resources/vector-db/vector-db.module';
 import { LlmModule } from './resources/llm/llm.module';
 import { ReviewModule } from './resources/review/review.module';
-import { DatabaseModule } from './resources/database/database.module';
+import { DatabaseModule } from './database/database.module';
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ErrorFilter } from './filters/error.filters';

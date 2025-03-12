@@ -1,5 +1,5 @@
-import { Reference } from 'src/resources/database/entities/reference.entity';
-import { Review } from 'src/resources/database/entities/review.entity';
+import { Reference } from 'src/database/entities/reference.entity';
+import { Review } from 'src/database/entities/review.entity';
 import {
   Entity,
   Column,
@@ -24,11 +24,11 @@ export class Account {
   @Column({ default: 'active' })
   status: 'active' | 'inactive';
 
-  @Column({ nullable: true, select: false })
-  resetToken: string;
+  @Column({ type: 'varchar', nullable: true, select: false })
+  resetToken: string | null;
 
-  @Column({ nullable: true, select: false })
-  resetTokenExpiry: Date;
+  @Column({ type: 'datetime', nullable: true, select: false })
+  resetTokenExpiry: Date | null;
 
   @CreateDateColumn({
     select: false,

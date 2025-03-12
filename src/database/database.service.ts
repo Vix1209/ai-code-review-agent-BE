@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Reference } from './entities/reference.entity';
 import { Review } from './entities/review.entity';
-import { Account } from '../account/entities/account.entity';
+import { Account } from '../resources/account/entities/account.entity';
 
 @Injectable()
 export class DatabaseService {

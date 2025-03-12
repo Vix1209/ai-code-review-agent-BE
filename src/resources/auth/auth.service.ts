@@ -9,9 +9,13 @@ import { compare, hash } from 'bcrypt';
 import { BadRequestException } from '@nestjs/common';
 import { Account } from '../account/entities/account.entity';
 import { JwtService } from '@nestjs/jwt';
-import { Repository } from 'typeorm';
+import { MoreThan, Repository } from 'typeorm';
 import { EmailValidationException } from 'utils';
 import { AccountDto } from './dto/account.dto';
+import { randomBytes } from 'crypto';
+import { MailService } from 'src/mail/mail.service';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
 
 @Injectable()
 export class AuthService {
@@ -19,6 +23,7 @@ export class AuthService {
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
     private jwtService: JwtService,
+    private mailService: MailService,
   ) {}
 
   async loginOrSignup(accountDto: AccountDto) {
@@ -125,6 +130,45 @@ export class AuthService {
     // Exclude the password field from the result
     const { password, ...result } = account;
     return result;
+  }
+
+  async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {
+    const { email } = forgotPasswordDto;
+    const user = await this.accountRepository.findOne({ where: { email } });
+    if (!user) {
+      throw new NotFoundException(`User with email ${email} not found`);
+    }
+
+    const resetToken = randomBytes(32).toString('hex');
+    const resetTokenExpiry = new Date(Date.now() + 3600000); // 1 hour expiry
+
+    user.resetToken = resetToken;
+    user.resetTokenExpiry = resetTokenExpiry;
+
+    await this.accountRepository.save(user);
+
+    const resetUrl = `${process.env.FRONTEND_URL}/resetpassword?token=${resetToken}&email=${email}`;
+    await this.mailService.sendPasswordResetEmail(user.email, resetUrl);
+    return;
+  }
+
+  async resetPassword(resetPasswordDto: ResetPasswordDto) {
+    const { token, newPassword } = resetPasswordDto;
+    const user = await this.accountRepository.findOne({
+      where: { resetToken: token, resetTokenExpiry: MoreThan(new Date()) },
+    });
+    if (!user) {
+      throw new ConflictException('Invalid or expired token');
+    }
+
+    user.password = await hash(newPassword, 10);
+    user.resetToken = null;
+    user.resetTokenExpiry = null;
+    const saved = await this.accountRepository.save(user);
+    if (saved) {
+      await this.mailService.sendResetTokenConfirmation(user.email, user, true);
+    }
+    return;
   }
 }
 

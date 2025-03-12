@@ -6,7 +6,7 @@ import {
 import { EmbeddingService } from '../embedding/embedding.service';
 import { LlmService } from '../llm/llm.service';
 import { VectorDbService } from '../vector-db/vector-db.service';
-import { DatabaseService } from '../database/database.service';
+import { DatabaseService } from '../../database/database.service';
 import {
   GenerateReviewDto,
   SubmitReferenceDto,

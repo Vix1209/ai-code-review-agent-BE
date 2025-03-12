@@ -1,5 +1,5 @@
 import { DataSource } from 'typeorm';
-import { createTypeOrmConfig } from 'src/resources/database/database.module';
+import { createTypeOrmConfig } from 'src/database/database.module';
 
 export default new DataSource({
   ...createTypeOrmConfig(),

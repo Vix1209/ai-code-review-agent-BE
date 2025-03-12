@@ -7,10 +7,12 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountModule } from '../account/account.module';
 import { Account } from '../account/entities/account.entity';
 import { JwtStrategy } from './strategy/jwt.strategy';
+import { MailModule } from 'src/mail/mail.module';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([Account]),
+    MailModule,
     AccountModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET_KEY,
