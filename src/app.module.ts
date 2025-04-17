@@ -4,11 +4,13 @@ import { VectorDbModule } from './resources/vector-db/vector-db.module';
 import { LlmModule } from './resources/llm/llm.module';
 import { ReviewModule } from './resources/review/review.module';
 import { DatabaseModule } from './database/database.module';
-import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { ErrorInterceptor } from './interceptors/error.interceptor';
 import { ErrorFilter } from './filters/error.filters';
 import { AccountModule } from './resources/account/account.module';
 import { AuthModule } from './resources/auth/auth.module';
+import { RateLimiterModule } from './rate-limiter/rate-limiter.module';
+import { ThrottlerGuard } from '@nestjs/throttler';
 
 @Module({
   imports: [
@@ -19,6 +21,7 @@ import { AuthModule } from './resources/auth/auth.module';
     DatabaseModule,
     AccountModule,
     AuthModule,
+    RateLimiterModule,
   ],
   providers: [
     Logger,
@@ -34,6 +37,10 @@ import { AuthModule } from './resources/auth/auth.module';
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
+    },
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
     },
   ],
 })
